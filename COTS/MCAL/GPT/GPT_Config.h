@@ -1,14 +1,14 @@
 /*******************************************************************
  *  FILE DESCRIPTION
 -----------------------
- *  File:  _GPIO_CONFIG_H_
- *  Module:  GPIO
- *  Description:  GPIO Configurations
+ *  File:  _GPT_CONFIG_H_
+ *  Module:  GPT
+ *  Description:  General Pupose Timer Configurations
 *******************************************************************/
-#ifndef _GPIO_CONFIG_H_
-#define _GPIO_CONFIG_H_
-
+#ifndef _GPT_CONFIG_H_
+#define _GPT_CONFIG_H_
+#define F_CPU												(16000000)
 #endif
 /********************************************************************
- *  END OF FILE: NVIC_Config.h
+ *  END OF FILE: GPT_Config.h
 ********************************************************************/	

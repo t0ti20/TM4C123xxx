@@ -11,8 +11,6 @@
 -----------     INCLUDES     -------------
 *****************************************/
 #include "Standard_Types.h"
-
-
 /*****************************************
 ----------     ADDRESSES     -------------
 *****************************************/
@@ -22,12 +20,12 @@
 #define INTCTRL_BASE           			(PERIPH_BASE_NVIC + 0xD04)
 #define SYSHNDCTRL_BASE							(PERIPH_BASE_NVIC + 0xD24)
 #define SWTRIG_BASE									(PERIPH_BASE_NVIC + 0xF00)
-#define NVIC_ENABLE_BASE	 	   			((u32*)(PERIPH_BASE_NVIC + 0x100))
-#define NVIC_DISABLE_BASE		   			((u32*)(PERIPH_BASE_NVIC + 0x180))
-#define NVIC_SET_PENDING_BASE		    ((u32*)(PERIPH_BASE_NVIC + 0x200))
-#define NVIC_CLEAR_PENDING_BASE		  ((u32*)(PERIPH_BASE_NVIC + 0x280))
-#define NVIC_PRIORITY_BASE	 	   		((u32*)(PERIPH_BASE_NVIC + 0x400))
 #define INTCTRL           	   			(*((INTCTRL_TAG*)(INTCTRL_BASE)))
+#define NVIC_ENABLE_BASE	 	   			((volatile u32*)(PERIPH_BASE_NVIC + 0x100))
+#define NVIC_DISABLE_BASE		   			((volatile u32*)(PERIPH_BASE_NVIC + 0x180))
+#define NVIC_SET_PENDING_BASE		    ((volatile u32*)(PERIPH_BASE_NVIC + 0x200))
+#define NVIC_CLEAR_PENDING_BASE		  ((volatile u32*)(PERIPH_BASE_NVIC + 0x280))
+#define NVIC_PRIORITY_BASE	 	   		((volatile u32*)(PERIPH_BASE_NVIC + 0x400))
 #define SYSHNDCTRL           	   	 	(*((volatile u32*)(SYSHNDCTRL_BASE)))
 #define APINT           	   	 			(*((volatile u32*)(APINT_BASE)))
 #define SWTRIG             					(*((volatile u8 *)(SWTRIG_BASE)))
@@ -91,12 +89,12 @@ typedef enum
 /* --- NVIC STATE --- */
 typedef enum
 {
-	NVIC_Disable,
-	NVIC_Enable,
-	NVIC_Set_Pending,
-	NVIC_Clear_Pending,
-	NVIC_Active,
-	NVIC_Not_Active
+	NVIC_Disable							=0,
+	NVIC_Enable								=1,
+	NVIC_Set_Pending					=2,
+	NVIC_Clear_Pending				=3,
+	NVIC_Active								=4,
+	NVIC_Not_Active						=5,
 }NVIC_STATE;
 /* --- NVIC TYPES --- */
 typedef enum
@@ -132,7 +130,10 @@ typedef enum
 	PWM0_GENERATOR_0					=9,
 	PWM0_GENERATOR_1					=10,
 	PWM0_GENERATOR_2					=11,
-	/**/
+	/*To Be Completed*/
+	GPT_0_A										=19,
+	GPT_0_B										=20,
+	/*To Be Completed*/
 	PWM1_GENERATOR_0					=134,
 	PWM1_GENERATOR_1					=135,
 	PWM1_GENERATOR_2					=136,
@@ -140,7 +141,6 @@ typedef enum
 	PWM1_FAULT								=138,
 }
 NVIC_PERIPHERAL_TYPES;
-
 #endif
 /********************************************************************
  *  END OF FILE: NVIC_Private.h

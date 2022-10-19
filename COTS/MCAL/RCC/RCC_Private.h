@@ -1,70 +1,89 @@
-/*File Guard*/
+/*******************************************************************
+ *  FILE DESCRIPTION
+-----------------------
+ *  File:  _RCC_PRIVATE_H_
+ *  Module:  RCC
+ *  Description:  RESET AND CLOCK CTRL REGISTERS
+*******************************************************************/
 #ifndef _RCC_PRIVATE_H_
 #define _RCC_PRIVATE_H_
-/********************  Include ********************/
-#include "../../Library/Standard_Types.h"
-/********************  Peripheral Address Configure ***************/
-#define PERIPH_BASE_RCC       ((u32)0x40000000)
-#define AHB1PERIPH_BASE_RCC   (PERIPH_BASE_RCC + 0x00020000)
-#define RCC_BASE              (AHB1PERIPH_BASE_RCC + 0x3800)
-#define RESET_CONTROL         ((RCC_Register *) RCC_BASE)
-/********************  Register definition for RCC ***************/
+/*****************************************
+-----------     INCLUDES     -------------
+*****************************************/
+#include "Standard_Types.h"
+/*****************************************
+----------     ADDRESSES     -------------
+*****************************************/
+/* --- Peripheral Address --- */
+#define PERIPH_BASE_RCC       (0x400FE000)
+#define RCC_BASE		   				(PERIPH_BASE_RCC + 0x060)
+#define RCC					          (*((RCC_TAG*)(RCC_BASE)))
+#define CLOCK       					((volatile u32*)(PERIPH_BASE_RCC))
+#define RCGCWD								(0x180)
+#define RCGCTIMER							(0x181)
+#define RCGCGPIO							(0x182)
+#define RCGCPWM								(0x190)
+/*****************************************
+----------   Rigister Tag   -------------
+*****************************************/
+/* --- INTCTRL  Definition --- */
 typedef struct
 {
-volatile u32 CR;            /*RCC clock control register*/
-volatile u32 PLLCFGR;       /*RCC PLL configuration register*/
-volatile u32 CFGR;          /*RCC clock configuration register*/
-volatile u32 CIR;           /*RCC clock interrupt register*/
-volatile u32 AHB1RSTR;      /*RCC AHB1 peripheral reset register*/
-volatile u32 AHB2RSTR;      /*RCC AHB2 peripheral reset register*/
-volatile u32 AHB3RSTR;      /*RCC AHB3 peripheral reset register*/
- 	 	 u32 RESERVED0;   	 /*Reserved*/
-volatile u32 APB1RSTR;      /*RCC APB1 peripheral reset register*/
-volatile u32 APB2RSTR;      /*RCC APB2 peripheral reset register*/
- 	 	 u32 RESERVED1[2];  /*Reserved*/
-volatile u32 AHB1ENR;       /*RCC AHB1 peripheral clock register*/
-volatile u32 AHB2ENR;       /*RCC AHB2 peripheral clock register*/
-volatile u32 AHB3ENR;       /*RCC AHB3 peripheral clock register*/
- 	 	 u32 RESERVED2;     /*Reserved*/
-volatile u32 APB1ENR;       /*RCC APB1 peripheral clock enable register*/
-volatile u32 APB2ENR;       /*RCC APB2 peripheral clock enable register*/
-		 u32 RESERVED3[2];  /*Reserved*/
-volatile u32 AHB1LPENR;     /*RCC AHB1 peripheral clock enable in low power mode register*/
-volatile u32 AHB2LPENR;     /*RCC AHB2 peripheral clock enable in low power mode register*/
-volatile u32 AHB3LPENR;     /*RCC AHB3 peripheral clock enable in low power mode register*/
-		 u32 RESERVED4;     /*Reserved*/
-volatile u32 APB1LPENR;     /*RCC APB1 peripheral clock enable in low power mode register*/
-volatile u32 APB2LPENR;     /*RCC APB2 peripheral clock enable in low power mode register*/
-		 u32 RESERVED5[2];  /*Reserved*/
-volatile u32 BDCR;          /*RCC Backup domain control register*/
-volatile u32 CSR;           /*RCC clock control & status register*/
-		 u32 RESERVED6[2];  /*Reserved*/
-volatile u32 SSCGR;         /*RCC spread spectrum clock generation register*/
-volatile u32 PLLI2SCFGR;    /*RCC PLLI2S configuration register*/
-} RCC_Register;
-/********************  Bit definition for RCC_AHB1ENR register  ***************/
-#define  RCC_AHB1ENR_GPIOAEN                 ((u32)0x00000001)
-#define  RCC_AHB1ENR_GPIOBEN                 ((u32)0x00000002)
-#define  RCC_AHB1ENR_GPIOCEN                 ((u32)0x00000004)
-#define  RCC_AHB1ENR_GPIODEN                 ((u32)0x00000008)
-#define  RCC_AHB1ENR_GPIOEEN                 ((u32)0x00000010)
-#define  RCC_AHB1ENR_GPIOFEN                 ((u32)0x00000020)
-#define  RCC_AHB1ENR_GPIOGEN                 ((u32)0x00000040)
-#define  RCC_AHB1ENR_GPIOHEN                 ((u32)0x00000080)
-#define  RCC_AHB1ENR_GPIOIEN                 ((u32)0x00000100)
-#define  RCC_AHB1ENR_CRCEN                   ((u32)0x00001000)
-#define  RCC_AHB1ENR_BKPSRAMEN               ((u32)0x00040000)
-#define  RCC_AHB1ENR_CCMDATARAMEN            ((u32)0x00100000)
-#define  RCC_AHB1ENR_DMA1EN                  ((u32)0x00200000)
-#define  RCC_AHB1ENR_DMA2EN                  ((u32)0x00400000)
-#define  RCC_AHB1ENR_ETHMACEN                ((u32)0x02000000)
-#define  RCC_AHB1ENR_ETHMACTXEN              ((u32)0x04000000)
-#define  RCC_AHB1ENR_ETHMACRXEN              ((u32)0x08000000)
-#define  RCC_AHB1ENR_ETHMACPTPEN             ((u32)0x10000000)
-#define  RCC_AHB1ENR_OTGHSEN                 ((u32)0x20000000)
-#define  RCC_AHB1ENR_OTGHSULPIEN             ((u32)0x40000000)
-/********************  Ports Definitions  ***************/
-typedef enum{Port_A,Port_B,Port_C,Port_D,Port_E}RCC_PORTS;
-typedef enum{Clock_Disable,Clock_Enable}RCC_CLOCK;
+  u32 MOSCDIS 		: 	1	 ;          /* Main Oscillator Disable */
+  u32 				 		: 	3	 ;         	
+  u32 OSCSRC 			: 	2	 ;          /* Oscillator Source */
+	u32 XTAL		 		: 	5	 ;          /* Crystal Value */
+	u32 BYPASS 			: 	1	 ;          /* PLL Bypass */
+	u32 				 		: 	1	 ;          
+	u32 PWRDN	 			: 	1	 ;          /* PLL Power Down */
+	u32 			 			: 	3	 ;         	
+	u32 PWMDIV 			: 	3	 ;          /* PWM Unit Clock Divisor */
+	u32 USEPWMDIV		: 	1	 ;          /* Enable PWM Clock Divisor */
+	u32 				 		: 	1	 ;          
+	u32 USESYSDIV		: 	1	 ;          /* Enable System Clock Divider */
+	u32 SYSDIV			: 	4	 ;          /* System Clock Divisor */
+	u32 ACG			 		: 	1	 ;          /* Auto Clock Gating */
+	u32 				 		: 	4	 ;          
+} RCC_BF;
+typedef union{u32 Register;RCC_BF Bits;}RCC_TAG;
+/*****************************************
+----- GLOBAL DATA TYPES & STRUCTURES -----
+*****************************************/
+typedef enum
+{
+			RCC_WDT										=0,
+			RCC_GPIO									=1,
+			RCC_GPT										=2,
+			RCC_PWM										=3,
+}RCC_CLOCK;
+typedef enum
+{
+			RCC_Main_Oscillator				=0,
+			RCC_Precision_Internal		=1,
+			RCC_Precision_Internal_4	=2,
+			RCC_Low_Frequency					=3,
+}RCC_SOURCES;
+typedef enum
+{
+			RCC_5Mhz									=0x09,
+			RCC_6Mhz									=0x0B,
+			RCC_8Mhz									=0x0E,
+			RCC_10Mhz									=0x10,
+			RCC_12Mhz									=0x11,
+			RCC_24Mhz									=0x19,
+			RCC_25Mhz									=0x1A,
+}RCC_CRYSTAL_VALUE;
+typedef enum
+{
+			RCC_Dev_1									=0x00,
+			RCC_Dev_2									=0x01,
+			RCC_Dev_3									=0x02,
+			RCC_Dev_4									=0x03,
+			RCC_Dev_5									=0x04,
+			RCC_Dev_6									=0x05,
+			RCC_Dev_16								=0x0F,
+}RCC_DEVISOR;
 #endif
-/* _RCC_PRIVATE_H_ */
+/********************************************************************
+ *  END OF FILE: RCC_Private.h
+********************************************************************/

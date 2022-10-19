@@ -10,26 +10,18 @@
 *****************************************/
 #include "NVIC_Interface.h"
 /*****************************************
---------     LOCAL FUNCTION     ----------
-*****************************************/
-
-/*****************************************
-----------     LOCAL DATA     ------------
-*****************************************/
-
-/*****************************************
 ----------    GLOBAL DATA     ------------
 *****************************************/
 /********************************************************************
-* Syntax          : Void FunctionName(AnyType parameterName)
-* Description     : Describe this service
+* Syntax          : Void NVIC_VidInterrupt_Initialization(NVIC_STATE Copy_State,NVIC_GROUPS Copy_u8Groups)
+* Description     : Initialization Interrupt 
 * Sync-Async      : Synchronous
 * Reentrancy      : Non Reentrant
-* Parameters (in) : parameterName   Parameter Describtion
+* Parameters (in) : (NVIC_Enable-NVIC_Disable),(NVIC_XXX,NVIC_XXY,NVIC_XYY,NVIC_YYY)
 * Parameters (out): None
-* Return value:   : Std_ReturnType  E_OK
+* Return value:   : None
 ********************************************************************/
-void NVIC_VidInterrupt_Initialization(NVIC_STATE Copy_State,u8 Copy_u8Groups)
+void NVIC_VidInterrupt_Initialization(NVIC_STATE Copy_State,NVIC_GROUPS Copy_u8Groups)
 {
 	if(Copy_State==NVIC_Enable)
 	{
@@ -50,17 +42,7 @@ void NVIC_VidInterrupt_Initialization(NVIC_STATE Copy_State,u8 Copy_u8Groups)
 * Description     : Configure Victor Table Interrupts
 * Sync-Async      : -
 * Reentrancy      : Non Reentrant
-* Parameters (in) : Copy_Interrupt Interrupt Name From NVIC_TYPES , Copy_State Interrupt State From NVIC_STATE
-* Parameters (out): -
-* Return value:   : -
-********************************************************************/
-//void NVIC_VidInterrupt_Peripheral_Get_Status(NVIC_CORE_TYPES Copy_Interrupt,u8 *Copy_Pu8Status)
-/********************************************************************
-* Syntax          : Void NVIC_VidInterrupt_Set(NVIC_TYPES Copy_Interrupt,NVIC_STATE Copy_State)
-* Description     : Configure Victor Table Interrupts
-* Sync-Async      : -
-* Reentrancy      : Non Reentrant
-* Parameters (in) : Copy_Interrupt Interrupt Name From NVIC_TYPES , Copy_State Interrupt State From NVIC_STATE
+* Parameters (in) : (NVIC_PERIPHERAL_TYPES),(NVIC_STATE),(Group_Number),(Sub_Group_Number)
 * Parameters (out): -
 * Return value:   : -
 ********************************************************************/
@@ -93,7 +75,7 @@ void NVIC_VidInterrupt_Peripheral_Set(NVIC_PERIPHERAL_TYPES Copy_Interrupt,NVIC_
 * Description     : Configure Core Interrupts
 * Sync-Async      : -
 * Reentrancy      : Reentrant
-* Parameters (in) : Copy_u8Fault Fault Name From NVIC_CORE_TYPES , Copy_State Fault State From NVIC_STATE
+* Parameters (in) : (Fault Name From NVIC_CORE_TYPES) , (Fault State From NVIC_STATE)
 * Parameters (out): -
 * Return value:   : -
 ********************************************************************/

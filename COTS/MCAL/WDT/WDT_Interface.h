@@ -1,26 +1,25 @@
 /*******************************************************************
  *  FILE DESCRIPTION
 -----------------------
- *  File:  _NVIC_INTERFACE_H_
- *  Module:  NVIC
- *  Description:  Nested Victor Interrupt Ctrl
+ *  File:  _WDT_INTERFACE_H_
+ *  Module:  WDT
+ *  Description:  Watch Dog Timer Interface
 *******************************************************************/
-#ifndef _NVIC_INTERFACE_H_
-#define _NVIC_INTERFACE_H_
+#ifndef _WDT_INTERFACE_H_
+#define _WDT_INTERFACE_H_
 /*****************************************
 -----------     INCLUDES     -------------
 *****************************************/
 #include "Standard_Types.h"
 #include "Macros.h"
-#include "NVIC_Private.h"
-#include "NVIC_Config.h"
+#include "RCC_Interface.h"
+#include "WDT_Private.h"
+#include "WDT_Config.h"
 /*****************************************
 -------   FUNCTIONS PROTOTYPES   ---------
 *****************************************/
-void NVIC_VidInterrupt_Peripheral_Set(NVIC_PERIPHERAL_TYPES Copy_Interrupt,NVIC_STATE Copy_State,NVIC_GROUPS Copy_u8Group,NVIC_GROUPS Copy_u8Sub_Group);
-void NVIC_VidInterrupt_Initialization(NVIC_STATE Copy_State,NVIC_GROUPS Copy_u8Groups);
-void NVIC_VidInterrupt_Core_Set(u8 Copy_u8Fault,NVIC_STATE Copy_State);
+void WDT_VidTimer_1_Initialization(u32 Copy_u32Time_MS,WDT_CONFIG Copy_Reset);
 #endif
 /********************************************************************
- *  END OF FILE: NVIC_Interface.h
+ *  END OF FILE: WDT_Interface.h
 ********************************************************************/

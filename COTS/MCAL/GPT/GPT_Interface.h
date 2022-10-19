@@ -1,26 +1,28 @@
 /*******************************************************************
  *  FILE DESCRIPTION
 -----------------------
- *  File:  _NVIC_INTERFACE_H_
- *  Module:  NVIC
- *  Description:  Nested Victor Interrupt Ctrl
+ *  File:  _GPT_INTERFACE_H_
+ *  Module:  GPT
+ *  Description:  General Purpose Timer Interface
 *******************************************************************/
-#ifndef _NVIC_INTERFACE_H_
-#define _NVIC_INTERFACE_H_
+#ifndef _GPT_INTERFACE_H_
+#define _GPT_INTERFACE_H_
 /*****************************************
 -----------     INCLUDES     -------------
 *****************************************/
 #include "Standard_Types.h"
 #include "Macros.h"
-#include "NVIC_Private.h"
-#include "NVIC_Config.h"
+#include "GPT_Private.h"
+#include "GPT_Config.h"
+#include "RCC_Interface.h"
+#include "NVIC_Interface.h"
 /*****************************************
 -------   FUNCTIONS PROTOTYPES   ---------
 *****************************************/
-void NVIC_VidInterrupt_Peripheral_Set(NVIC_PERIPHERAL_TYPES Copy_Interrupt,NVIC_STATE Copy_State,NVIC_GROUPS Copy_u8Group,NVIC_GROUPS Copy_u8Sub_Group);
-void NVIC_VidInterrupt_Initialization(NVIC_STATE Copy_State,NVIC_GROUPS Copy_u8Groups);
-void NVIC_VidInterrupt_Core_Set(u8 Copy_u8Fault,NVIC_STATE Copy_State);
+void GPT_VidTimer_1_PWM(u8 Copy_Frequency,u8 Copy_Duty);
+void GPT_VidTimer_0_Delay_ms(u32 Copy_u32Time,u8 Copy_Interrupt);
+void GPT_VidTimer_0_A_ISR(void(*Copy_VidInturrept)(void));
 #endif
 /********************************************************************
- *  END OF FILE: NVIC_Interface.h
+ *  END OF FILE: GPT_Interface.h
 ********************************************************************/
